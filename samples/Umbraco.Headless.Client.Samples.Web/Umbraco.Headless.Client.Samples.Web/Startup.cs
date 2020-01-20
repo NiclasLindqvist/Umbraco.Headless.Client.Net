@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Umbraco.Headless.Client.Net.Configuration;
+using Umbraco.Headless.Client.Samples.Web.Models;
 using Umbraco.Headless.Client.Samples.Web.Mvc;
 
 namespace Umbraco.Headless.Client.Samples.Web
@@ -36,7 +38,13 @@ namespace Umbraco.Headless.Client.Samples.Web
             var projectAlias = umbracoConfig.GetValue<string>("projectAlias");
             var apiKey = umbracoConfig.GetValue<string>("apiKey");
 
-            services.AddUmbracoHeadlessContentDelivery(projectAlias, apiKey);
+            var configuration = new ApiKeyBasedConfiguration(projectAlias, apiKey);
+            configuration.ContentModelTypes.Add<Frontpage>();
+            configuration.ContentModelTypes.Add<Textpage>();
+
+            configuration.ElementModelTypes.Add<TextAndImage>();
+
+            services.AddUmbracoHeadlessContentDelivery(configuration);
 
             services.AddUmbracoHeadlessWebEngine();
         }
