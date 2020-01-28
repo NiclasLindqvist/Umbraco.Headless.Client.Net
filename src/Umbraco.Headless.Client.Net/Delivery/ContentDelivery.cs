@@ -171,6 +171,13 @@ namespace Umbraco.Headless.Client.Net.Delivery
             return content;
         }
 
+        public async Task<PagedContent<T>> Search<T>(string term, string culture = null, int page = 1, int pageSize = 10) where T : IContent
+        {
+            var service = RestService.For<TypedPagedContentDeliveryEndpoints<T>>(_httpClient);
+            var content = await service.Search(_configuration.ProjectAlias, culture, term, page, pageSize);
+            return content;
+        }
+
         private string GetAliasFromClassName<T>() => _modelNameResolver.GetContentModelAlias(typeof(T));
     }
 }

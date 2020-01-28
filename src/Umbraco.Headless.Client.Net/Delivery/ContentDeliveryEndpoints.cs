@@ -60,6 +60,9 @@ namespace Umbraco.Headless.Client.Net.Delivery
 
         [Post("/content/filter?page={page}&pageSize={pageSize}")]
         Task<Delivery.Models.PagedContent<T>> Filter([Header(Constants.Headers.ProjectAlias)] string projectAlias, [Header(Constants.Headers.AcceptLanguage)] string culture, [Body] ContentFilter filter, int page, int pageSize);
+
+        [Get("/content/search?term={term}&page={page}&pageSize={pageSize}")]
+        Task<Delivery.Models.PagedContent<T>> Search([Header(Constants.Headers.ProjectAlias)] string projectAlias, [Header(Constants.Headers.AcceptLanguage)] string culture, string term, int page, int pageSize);
     }
 
     [Headers(Constants.ApiVersionHeader)]

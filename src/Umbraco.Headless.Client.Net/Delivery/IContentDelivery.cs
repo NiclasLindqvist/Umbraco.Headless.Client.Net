@@ -168,7 +168,7 @@ namespace Umbraco.Headless.Client.Net.Delivery
         /// <param name="culture">Content Culture (Optional)</param>
         /// <param name="page">Integer specifying the page number (Optional)</param>
         /// <param name="pageSize">Integer specifying the page size (Optional)</param>
-        /// <returns></returns>
+        /// <returns><see cref="PagedContent"/></returns>
         Task<PagedContent> Filter(ContentFilter filter, string culture = null, int page = 1, int pageSize = 10);
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace Umbraco.Headless.Client.Net.Delivery
         /// <param name="culture">Content Culture (Optional)</param>
         /// <param name="page">Integer specifying the page number (Optional)</param>
         /// <param name="pageSize">Integer specifying the page size (Optional)</param>
-        /// <returns></returns>
+        /// <returns><see cref="PagedContent{T}"/></returns>
         Task<PagedContent<T>> Filter<T>(ContentFilter filter, string culture = null, int page = 1, int pageSize = 10) where T : IContent;
 
         /// <summary>
@@ -191,5 +191,15 @@ namespace Umbraco.Headless.Client.Net.Delivery
         /// <param name="pageSize">Integer specifying the page size (Optional)</param>
         /// <returns><see cref="PagedContent"/></returns>
         Task<PagedContent> Search(string term, string culture = null, int page = 1, int pageSize = 10);
+
+        /// <summary>
+        /// Search for content by term
+        /// </summary>
+        /// <param name="term">Search term</param>
+        /// <param name="culture">Content Culture (Optional)</param>
+        /// <param name="page">Integer specifying the page number (Optional)</param>
+        /// <param name="pageSize">Integer specifying the page size (Optional)</param>
+        /// <returns><see cref="PagedContent{T}"/></returns>
+        Task<PagedContent<T>> Search<T>(string term, string culture = null, int page = 1, int pageSize = 10) where T : IContent;
     }
 }
